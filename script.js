@@ -3,3 +3,5 @@ const root=document.documentElement;const st=localStorage.getItem('portfolio-the
 document.querySelectorAll('.print-case').forEach(button=>{
   button.addEventListener('click',()=>window.print());
 });
+
+const lightbox=document.getElementById('lightbox');if(lightbox){const imgBox=lightbox.querySelector('img');const txt=lightbox.querySelector('p');document.querySelectorAll('.gallery-item img').forEach(img=>{img.closest('.gallery-item').addEventListener('click',()=>{imgBox.src=img.src;imgBox.alt=img.alt;txt.textContent=img.alt;lightbox.classList.add('open');lightbox.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';});});const close=()=>{lightbox.classList.remove('open');lightbox.setAttribute('aria-hidden','true');document.body.style.overflow='';};lightbox.querySelector('.lightbox-close').addEventListener('click',close);lightbox.addEventListener('click',e=>{if(e.target===lightbox)close();});document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});}
