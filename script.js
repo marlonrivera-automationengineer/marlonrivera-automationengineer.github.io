@@ -1,16 +1,32 @@
-const menuButton = document.querySelector(".menu-button");
-const navLinks = document.querySelector(".nav-links");
+const menuButton=document.querySelector('.menu-button');
+const navLinks=document.querySelector('.nav-links');
+menuButton.addEventListener('click',()=>{const open=navLinks.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));});
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{navLinks.classList.remove('open');menuButton.setAttribute('aria-expanded','false');}));
+document.getElementById('year').textContent=new Date().getFullYear();
 
-menuButton.addEventListener("click", () => {
-  const isOpen = navLinks.classList.toggle("open");
-  menuButton.setAttribute("aria-expanded", String(isOpen));
-});
+const projectData={"avmi": {"title": "Automatic Visual Machine Inspection (AVMI)", "meta": "Philippines | 2014", "image": "assets/projects/page-8.jpg", "overview": "Designed and developed a fully automated visual inspection system to replace manual inspection in high-volume electronics manufacturing. The system integrated industrial sensors, precision positioning, vision inspection and PLC-controlled automation.", "responsibilities": "Machine concept development, mechanical design, PLC programming, HMI development, vision integration, sensor integration and electrical design support.", "technologies": "Keyence PLC and HMI, Keyence vision inspection, SolidWorks 3D/2D, industrial sensors, camera inspection and precision positioning.", "challenge": "Manual inspection depended on operator experience and created inconsistent quality, lower efficiency and risk of human error.", "solution": "Implemented synchronized product detection, automated inspection, pass/fail decision-making and production monitoring while maintaining required production cycle time."}, "laser": {"title": "Auto Laser Welding System", "meta": "Philippines | 2015", "image": "assets/projects/page-9.jpg", "overview": "Developed a fully automated laser welding machine for high-volume electronics manufacturing, supporting approximately 50,000 units per production line per month.", "responsibilities": "Machine concept, mechanical design, PLC programming, servo motion integration, pneumatic system design, machine assembly and production support.", "technologies": "Mitsubishi PLC, 3-axis IAI robot, YAG precision laser welding, SolidWorks and SMC pneumatics.", "challenge": "Maintain stable cycle time, repeatable product positioning and consistent laser welding quality during continuous production.", "solution": "Synchronized product positioning, laser activation, safety interlocks and machine diagnostics, followed by production validation, process optimization and operator training."}, "spray": {"title": "Automatic Spray Machine", "meta": "Philippines / Vietnam | 2015", "image": "assets/projects/page-10.jpg", "overview": "Led complete engineering design and automation development for a fully automatic spray machine used in camera-product manufacturing. The platform was later upgraded to Version 2 and deployed internationally.", "responsibilities": "Customer requirement analysis, machine concept, mechanical design, PLC/HMI programming, pneumatic design and customer acceptance support.", "technologies": "LSIS PLC, HMI, DI pump, SolidWorks, pneumatic systems and precision automation.", "challenge": "Achieve consistent coating quality, repeatable positioning, reduced operator dependency and reliable continuous operation.", "solution": "Integrated PLC control, servo positioning, pneumatics, product handling, spraying sequence, HMI monitoring and safety interlocks.", "impact": "Deployed in the Philippines and Vietnam, recognized through Korean Government patent recognition and contributed to Employee of the Year recognition."}, "diecast": {"title": "Fully Automated Diecasting Production Line", "meta": "Cambodia | 2020", "image": "assets/projects/page-11.jpg", "overview": "Led engineering design and implementation of a fully integrated automated production line combining robots, transfer systems, trimming, deburring and production monitoring.", "responsibilities": "Production-line planning, machine concept development, mechanical design, PLC programming, robot integration, transfer-system design and project leadership.", "technologies": "PLC/HMI, industrial networking, servo motion, SolidWorks, ABB robot, LCPL robot, automatic transfer systems, OEE and production monitoring.", "challenge": "Integrate multiple processes while maintaining stable production flow, equipment communication, safety and future scalability.", "solution": "Developed centralized coordination across multiple machines and established the foundation for Smart Manufacturing through real-time monitoring and OEE data collection."}, "deburring": {"title": "Robotic Deburring Automation Cell", "meta": "Thailand | 2022", "image": "assets/projects/page-12.jpg", "overview": "Designed and implemented a robotic deburring cell to improve product consistency, operator safety, production efficiency and repeatability.", "responsibilities": "Robot-cell layout, machine concept, robot integration, PLC/HMI programming, servo integration and safety-system integration.", "technologies": "Panasonic PLC/HMI/servo, Nachi 6-axis robot, SolidWorks, pneumatics, EOAT and production equipment.", "challenge": "Replace variable manual deburring with safe, accurate and repeatable robotic production while coordinating robot, PLC, fixture and sensors.", "solution": "Integrated robotic motion, fixture positioning, pneumatic clamping, sensor verification, safety interlocks and machine communication."}, "vacuum": {"title": "Vacuum Monitoring & Predictive Maintenance System", "meta": "Cambodia / Thailand | 2025", "image": "assets/projects/page-13.jpg", "overview": "Designed a centralized platform providing real-time vacuum pressure, machine-health status, historical trends and alarm visibility across production equipment.", "responsibilities": "System architecture, data collection, Python software, database, dashboards, alarm management, historical analysis, user management and deployment.", "technologies": "Vacuum sensors, Python, FastAPI, HTML, JavaScript, SQL, industrial data collection and predictive maintenance.", "challenge": "Manual machine-side observation made gradual degradation and historical fault investigation difficult.", "solution": "Built a web-based system with configurable machines, real-time charts, alarm logging, historical records and centralized maintenance visibility."}, "oee": {"title": "Smart Factory & OEE Monitoring System", "meta": "Cambodia | 2026", "image": "assets/projects/page-14.jpg", "overview": "Led development of a centralized Smart Factory and OEE platform integrating machine status, downtime events, production data and manufacturing dashboards.", "responsibilities": "System architecture, OEE design, PLC integration, production-data collection, Python development, dashboards and database design.", "technologies": "Mitsubishi PLC, machine-status readers, industrial networking, Python, FastAPI, HTML, JavaScript, SQL and REST API.", "challenge": "Manufacturing information was distributed across departments with limited real-time visibility for engineers and management.", "solution": "Created centralized databases and web dashboards that automatically collect machine status, downtime and OEE information for faster response and decision-making."}};
+const modal=document.getElementById('project-modal');
+const modalContent=document.getElementById('modal-content');
 
-document.querySelectorAll(".nav-links a").forEach(link => {
-  link.addEventListener("click", () => {
-    navLinks.classList.remove("open");
-    menuButton.setAttribute("aria-expanded", "false");
-  });
-});
-
-document.getElementById("year").textContent = new Date().getFullYear();
+function openProject(key){
+  const p=projectData[key];
+  if(!p)return;
+  const impact=p.impact?`<h3>Project Impact</h3><p>${p.impact}</p>`:'';
+  modalContent.innerHTML=`<article class="modal-project">
+    <p class="project-meta">${p.meta}</p>
+    <h2 id="modal-title">${p.title}</h2>
+    <img src="${p.image}" alt="${p.title}">
+    <h3>Project Overview</h3><p>${p.overview}</p>
+    <h3>Primary Responsibilities</h3><p>${p.responsibilities}</p>
+    <h3>Technologies Used</h3><p>${p.technologies}</p>
+    <h3>Engineering Challenge</h3><p>${p.challenge}</p>
+    <h3>Solution</h3><p>${p.solution}</p>${impact}
+  </article>`;
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden','false');
+  document.body.classList.add('modal-open');
+}
+function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('modal-open');}
+document.querySelectorAll('.project-card').forEach(card=>card.addEventListener('click',()=>openProject(card.dataset.project)));
+document.querySelectorAll('[data-close-modal]').forEach(el=>el.addEventListener('click',closeModal));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
