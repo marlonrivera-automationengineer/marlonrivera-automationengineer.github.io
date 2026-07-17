@@ -39,3 +39,27 @@
 @media(max-width:1080px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.career .job{grid-template-columns:105px 1fr}.career .job p{grid-column:2}}
 @media(max-width:900px){.feature-grid{grid-template-columns:1fr}.career-layout,.contact-layout{grid-template-columns:1fr;gap:24px}.career-intro{position:static}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:650px){.feature-grid .comparison-media{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.career .job{grid-template-columns:1fr;gap:5px}.career .job p{grid-column:auto}.contact-list{grid-template-columns:1fr}}
+
+
+/* Version 14: complete profile image, theme selector and career countries */
+.profile-card img{height:auto;aspect-ratio:1050/1379;object-fit:contain;object-position:center;background:#fff}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:8px 12px;border:1px solid var(--line);border-radius:11px;background:var(--panel);color:var(--text);font:inherit;font-size:.82rem;font-weight:800;cursor:pointer;transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.theme-toggle:hover{transform:translateY(-1px);border-color:var(--accent)}
+.theme-icon{font-size:1.05rem;line-height:1}.mobile-nav-actions{display:flex;align-items:center;gap:8px}.mobile-theme{display:none;padding:8px 11px}.project-mobile-theme{display:none}.job-period{display:grid;gap:3px;align-content:center}.job-country{color:#fff;font-size:.78rem;font-weight:750;line-height:1.25}.career .job small{display:block}
+
+body[data-theme="light"]{--bg:#f4f7fb;--panel:#ffffff;--panel2:#edf3f9;--text:#0a1728;--muted:#516174;--accent:#087fc3;--line:#cbd7e5;background:linear-gradient(180deg,#ffffff,#eef4fa 48%,#f7f9fc);color:var(--text)}
+body[data-theme="light"] .nav{background:rgba(255,255,255,.92)}
+body[data-theme="light"] .chip{color:#1d344c;background:#f3f7fb}
+body[data-theme="light"] .profile-card,body[data-theme="light"] .stat,body[data-theme="light"] .about-card,body[data-theme="light"] .feature,body[data-theme="light"] .card,body[data-theme="light"] .job,body[data-theme="light"] .application-card,body[data-theme="light"] .detail,body[data-theme="light"] .contact-list a,body[data-theme="light"] .theme-toggle{box-shadow:0 12px 32px rgba(29,55,82,.08)}
+body[data-theme="light"] .career .job p strong,body[data-theme="light"] .contact-list strong,body[data-theme="light"] .job-country{color:#17283a}
+body[data-theme="light"] .media-label{background:rgba(255,255,255,.92);color:#102238}
+body[data-theme="light"] footer{color:#536478}
+
+@media(max-width:900px){.profile-card img{height:auto}.links .theme-toggle{display:none}.mobile-theme{display:inline-flex}.project-mobile-theme{display:inline-flex}.project-links{display:flex}.project-links a{display:none}}
+@media(max-width:650px){.job-period{gap:1px}.job-country{margin-bottom:4px}}
+
+/* Version 15: simplified project heading, right-side flagship video, icon-only theme control */
+.sectionhead>p{display:none!important}
+.theme-toggle.icon-only{width:42px;min-width:42px;height:42px;min-height:42px;padding:0;border-radius:50%;gap:0}
+.theme-toggle.icon-only .theme-icon{font-size:1.2rem}
+@media(max-width:900px){.theme-toggle.icon-only{width:40px;min-width:40px;height:40px;min-height:40px}}
