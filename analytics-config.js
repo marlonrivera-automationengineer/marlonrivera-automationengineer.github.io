@@ -7,6 +7,6 @@
   Keep this file beside index.html.
 */
 window.PORTFOLIO_ANALYTICS = {
-  measurementId: 'G-15286539381',
+  measurementId: 'G-FP5KFZ5NH5',
   debug: false
 };
